@@ -4,11 +4,27 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 ROOT="$(pwd)"
 
+# Use a Python that every dependency ships prebuilt for. Brand-new releases force
+# source builds that need Xcode's command line tools (several GB).
+PY=""
+for candidate in python3.13 python3.12 python3.11; do
+  if command -v "$candidate" >/dev/null 2>&1; then PY="$candidate"; break; fi
+done
+if [ -z "$PY" ]; then
+  echo "Stoa needs Python 3.11, 3.12 or 3.13. Install Python 3.13 from https://www.python.org/downloads/ and re-run."
+  exit 1
+fi
+
+# Rebuild the environment if it was made with an unsupported Python.
+if [ -d .venv ] && ! .venv/bin/python -c 'import sys; sys.exit(not (3, 11) <= sys.version_info[:2] <= (3, 13))' 2>/dev/null; then
+  echo "Rebuilding .venv with $PY"
+  rm -rf .venv
+fi
 if [ ! -d .venv ]; then
-  python3 -m venv .venv
+  "$PY" -m venv .venv
 fi
 .venv/bin/pip install -q --upgrade pip
-.venv/bin/pip install -q -r requirements.txt
+.venv/bin/pip install -q --prefer-binary -r requirements.txt
 [ -f .env ] || { cp .env.example .env; echo "Created .env. Edit it (set STOA_PASSWORD), then re-run."; exit 0; }
 
 PLIST="$HOME/Library/LaunchAgents/com.stoa.app.plist"

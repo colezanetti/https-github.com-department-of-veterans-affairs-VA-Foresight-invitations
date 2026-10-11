@@ -83,7 +83,7 @@ which signs in the same way the Garmin Connect app does.
 
 ## Run it
 
-You need **Python 3.11+** (on a Mac: `brew install python`).
+You need **Python 3.11, 3.12 or 3.13** (3.13 recommended, from python.org). Newer versions may lack prebuilt packages and fail to install.
 
 ```bash
 git clone <this repo> stoa && cd stoa
