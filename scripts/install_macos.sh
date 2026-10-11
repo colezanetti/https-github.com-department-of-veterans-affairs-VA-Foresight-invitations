@@ -24,7 +24,8 @@ if [ ! -d .venv ]; then
   "$PY" -m venv .venv
 fi
 .venv/bin/pip install -q --upgrade pip
-.venv/bin/pip install -q --prefer-binary -r requirements.txt
+# Prebuilt packages only: a source build would need Xcode tools (several GB).
+.venv/bin/pip install -q --only-binary=:all: -r requirements.txt
 [ -f .env ] || { cp .env.example .env; echo "Created .env. Edit it (set STOA_PASSWORD), then re-run."; exit 0; }
 
 PLIST="$HOME/Library/LaunchAgents/com.stoa.app.plist"
