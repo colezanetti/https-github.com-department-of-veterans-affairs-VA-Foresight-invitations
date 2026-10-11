@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Stoa</title>
+  <meta name="description" content="Daily Stoic practice, Franklin's self-examination, and Garmin health in one place.">
+  <meta name="theme-color" content="#f9f9f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0d0d0d" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Stoa">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/static/icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/static/icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div id="app" class="shell">
+    <nav class="nav" aria-label="Main">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">Σ</span><span>Stoa</span></div>
+      <a href="#/today" data-route="today"><span class="ico" aria-hidden="true">☀</span><span>Today</span></a>
+      <a href="#/review" data-route="review"><span class="ico" aria-hidden="true">▦</span><span>Franklin</span></a>
+      <a href="#/trends" data-route="trends"><span class="ico" aria-hidden="true">⌁</span><span>Trends</span></a>
+      <a href="#/calendar" data-route="calendar"><span class="ico" aria-hidden="true">◷</span><span>Calendar</span></a>
+      <a href="#/settings" data-route="settings"><span class="ico" aria-hidden="true">⚙</span><span>Settings</span></a>
+    </nav>
+    <main id="view" tabindex="-1"></main>
+  </div>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+  <script src="/static/vendor/chart.umd.min.js"></script>
+  <script src="/static/app.js" type="module"></script>
+</body>
+</html>
